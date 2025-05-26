@@ -1,0 +1,14 @@
+
+{
+  "name": "mistral-chat-gemini-pwa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "clean": "rm -rf dist",
+    "build": "npm run clean && mkdir -p dist/assets && esbuild index.tsx --bundle --outfile=dist/assets/app.js --jsx=automatic --loader:.tsx=tsx --platform=browser --format=esm --minify --sourcemap --external:react --external:react-dom/client --external:lucide-react --external:@google/genai --external:react-markdown --external:remark-gfm && cp manifest.json service-worker.js metadata.json dist/ && cp index.html dist/index.html && sed -i 's|src=\"./index.tsx\"|src=\"./assets/app.js\"|' dist/index.html && (find . -maxdepth 1 -name 'icon-*.png' -exec cp {} dist/ \\; || true)"
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.2",
+    "typescript": "^5.4.5"
+  }
+}
